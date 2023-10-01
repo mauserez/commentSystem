@@ -46,26 +46,26 @@ type Commentary = {
 };
 
 class CommentarySystem {
-	html: HTMLElement;
-	commentSection: HTMLElement;
-	commentBlock: HTMLElement;
-	actions: HTMLElement;
-	form: HTMLElement;
-	commentListElement: HTMLElement;
-	commentCounter: HTMLElement;
+	html: HTMLElement | null;
+	commentSection: HTMLElement | null;
+	commentBlock: HTMLElement | null;
+	actions: HTMLElement | null;
+	form: HTMLElement | null;
+	commentListElement: HTMLElement | null;
+	commentCounter: HTMLElement | null;
 
-	sorterElement: HTMLElement;
-	sortTextElement: HTMLElement;
-	sortIconElement: HTMLImageElement;
+	sorterElement: HTMLElement | null;
+	sortTextElement: HTMLElement | null;
+	sortIconElement: HTMLImageElement | null;
 
 	showLike: boolean;
-	showLikeToggler: HTMLElement;
+	showLikeToggler: HTMLElement | null;
 
-	textArea: HTMLTextAreaElement;
-	sendBtn: HTMLElement;
-	textLimitElement: HTMLElement;
-	textLimitErrorElement: HTMLElement;
-	sortListElement: HTMLElement;
+	textArea: HTMLTextAreaElement | null;
+	sendBtn: HTMLElement | null;
+	textLimitElement: HTMLElement | null;
+	textLimitErrorElement: HTMLElement | null;
+	sortListElement: HTMLElement | null;
 
 	parentId: string | null;
 	counter: number;
@@ -864,6 +864,5 @@ class CommentarySystem {
 			.scrollIntoView({ block: "center", behavior: "smooth" });
 	}
 }
-
 
 let commentarySystem = new CommentarySystem();
