@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="/reset.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<style>
+		html,
+		body {
+			margin: 0 auto;
+			background-color: #fff;
+			width: 100%;
+			font-family: "Inter", Helvetica, Arial, sans-serif;
+		}
+
+		header {
+			width: 100%;
+			height: 101px;
+			margin-bottom: 40px;
+		}
+
+		main {
+			display: grid;
+			grid-template-columns: 203px 1fr;
+			column-gap: 86px;
+		}
+
+		aside {
+			display: none;
+			height: 100%;
+		}
+
+		.main-color {
+			color: #000000;
+		}
+
+		.secondary-color {
+			color: #999999;
+		}
+
+		.content {
+			max-width: 1022px;
+			flex: 1;
+		}
+
+		.content-section {
+			overflow-y: scroll;
+		}
+
+		.content-section::-webkit-scrollbar {
+			display: none;
+		}
+
+		.content-blocks {
+			gap: 30px 48px;
+			display: grid;
+
+			margin-bottom: 40px;
+		}
+
+		.content-blocks > div,
+		header,
+		aside {
+			background-color: #d9d9d9;
+		}
+
+		.small-content {
+			height: 61px;
+		}
+
+		.large-content {
+			height: 168px;
+		}
+
+		.d-flex {
+			display: flex;
+		}
+
+		.cursor-pointer {
+			cursor: pointer;
+		}
+
+		@media screen and (max-width: 767px) {
+			.content {
+				padding: 0 10px;
+			}
+
+			.large-content {
+				height: 132px;
+			}
+
+			.hide-small-wv {
+				display: none;
+			}
+		}
+
+		@media screen and (min-width: 768px) {
+			.large-content {
+				height: 168px;
+				grid-column: 1/3;
+			}
+
+			.content-blocks {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+
+		@media screen and (max-width: 1439px) {
+			main {
+				display: flex;
+				justify-content: center;
+			}
+
+			header {
+				width: 100%;
+				margin-bottom: 30px;
+			}
+
+			.content {
+				flex: 1;
+				padding: 0 15px;
+			}
+
+			.content-blocks {
+				margin-bottom: 30px;
+			}
+		}
+
+		@media screen and (min-width: 1440px) {
+			aside {
+				width: 203px;
+				height: auto;
+				display: block;
+			}
+		}
+
+		.comment-section {
+			border-top: 3px solid #d9d9d9;
+		}
+
+		.comment-actions {
+			display: flex;
+			flex-wrap: wrap;
+			column-gap: 50px;
+			row-gap: 19px;
+			min-height: 55px;
+			align-items: center;
+			margin-top: 13px;
+			margin-bottom: 32px;
+		}
+
+		.comment-actions__filters {
+			display: flex;
+			column-gap: 50px;
+			padding-bottom: 5px;
+		}
+
+		.comment-actions__filters > * {
+			display: flex;
+			align-items: center;
+			column-gap: 10px;
+		}
+
+		.comment-actions__filters-text {
+			border-bottom: 1px solid #999;
+			font-size: 16px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment-actions__filters {
+				column-gap: 0;
+				justify-content: space-between;
+				width: 100%;
+			}
+			.comment-actions__filters > * {
+				column-gap: 5px;
+			}
+
+			.comment-actions__sorter > img {
+				width: 15px;
+			}
+
+			.comment-actions__filters-text {
+				font-size: 13px;
+			}
+		}
+
+		.comment__counter-info {
+			font-weight: 500;
+			font-size: 20px;
+			border-bottom: 3px solid #000;
+			padding-bottom: 5px;
+			display: flex;
+			gap: 13px;
+		}
+
+		.comment-author__avatar {
+			width: 61px;
+			height: 61px;
+			/* 50px small */
+			background-color: #fff;
+			border-radius: 50%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			border: 1px solid #fefefe;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment-author__avatar {
+				width: 50px;
+				height: 50px;
+				position: static;
+			}
+		}
+
+		.comment-author__wrap {
+			display: flex;
+			gap: 15px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.comment__author-answered-wrap {
+			display: flex;
+			gap: 13px;
+		}
+
+		.comment-answer__wrap {
+			display: flex;
+			gap: 13px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment-author__wrap {
+				row-gap: 0;
+			}
+
+			.comment-answer__wrap {
+				flex-direction: column;
+				gap: 4px;
+				align-self: baseline;
+				position: relative;
+				top: 15px;
+			}
+
+			.comment__author-answered-wrap {
+				gap: 8px;
+			}
+		}
+
+		.comment-author__name {
+			color: #122ac0;
+			font-size: 18px;
+			font-weight: 500;
+		}
+
+		.comments {
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 30px;
+			row-gap: 30px;
+		}
+
+		.comment__list {
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 30px;
+			row-gap: 30px;
+		}
+
+		.comment__form-wrap {
+			position: sticky;
+			top: 0;
+			overflow: hidden;
+			z-index: 1;
+			background-color: #fff;
+			padding-bottom: 30px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__form-wrap {
+				width: calc(100% + 20px);
+				margin-left: -10px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+		}
+
+		#comment__form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.comments__item {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			padding-left: 91px;
+			width: 100%;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comments__item {
+				padding-left: 0;
+			}
+		}
+
+		.comments__item-comment {
+			width: auto;
+		}
+
+		@media screen and (min-width: 768px) {
+			.comment__answer {
+				margin-left: 91px;
+			}
+		}
+
+		.comment__text-limit {
+			position: absolute;
+			top: 4px;
+			font-style: italic;
+			font-size: 14px;
+			right: 240px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__text-limit {
+				position: static;
+				display: flex;
+				justify-content: flex-end;
+				width: 100%;
+				font-size: 10px;
+			}
+		}
+
+		.comment__author-answered {
+			font-size: 18px;
+		}
+
+		.comment__public-date {
+			font-size: 13px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__public-date {
+				font-size: 12px;
+				margin-left: auto;
+			}
+		}
+
+		.comment__text-action-wrap {
+			display: flex;
+			gap: 15px 30px;
+			margin-top: 15px;
+			word-break: break-word;
+			flex-wrap: wrap;
+		}
+
+		.comment__send-btn-wrap {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.comment__send-btn-error {
+			font-size: 13px;
+			color: #ff0000;
+			position: absolute;
+			top: -36px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.comment__send-btn {
+			height: 61px;
+			color: #a1a1a1;
+			background-color: #d9d9d9;
+			border-radius: 5px;
+			font-size: 18px;
+			width: 213px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__send-btn-error {
+				top: 60px;
+			}
+
+			.comment__text-action-wrap {
+				display: grid;
+			}
+
+			.comment__send-btn {
+				width: auto;
+				height: 50px;
+				font-size: 16px;
+			}
+		}
+
+		.comment__send-btn.active {
+			background-color: #abd873;
+			color: #000;
+		}
+
+		.comment__form-textarea {
+			display: block;
+			flex: 1;
+			min-height: 61px;
+			padding: 20px 30px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px #9999999e;
+			resize: none;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__form-textarea {
+				font-size: 14px;
+				min-height: 50px;
+				padding: 17px 20px;
+			}
+		}
+
+		.comment__form-textarea::placeholder {
+			color: #999999;
+		}
+
+		.answer-to-author {
+			padding-left: 91px;
+			color: #999999;
+			font-size: 14px;
+			font-style: italic;
+			position: absolute;
+			bottom: 8px;
+		}
+
+		.comment__instruments {
+			font-size: 18px;
+			display: flex;
+			gap: 20px;
+			margin-top: 15px;
+			flex-wrap: wrap;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__instruments {
+				margin-top: 0;
+			}
+		}
+
+		.comment__instruments > div:nth-child(-n + 2),
+		.comment__instruments img {
+			cursor: pointer;
+		}
+
+		.comment__instruments > div {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.comment__like-block span {
+			min-width: 114px;
+		}
+		@media screen and (max-width: 767px) {
+			.comment__like-block span {
+				min-width: auto;
+			}
+		}
+
+		.comment__rate-block {
+			font-weight: 500;
+			font-size: 18px;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment__instruments {
+				gap: 14px;
+			}
+
+			.comment__instruments span {
+				font-size: 15px;
+			}
+
+			div.comment__rate-block {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+			}
+
+			.rate-plus {
+				order: -1;
+				position: relative;
+				top: -2px;
+			}
+
+			.rate-minus {
+				order: 1;
+				position: relative;
+				top: -1px;
+			}
+		}
+
+		.comment__rate-positive {
+			color: #8ac540;
+		}
+
+		.comment__rate-negative {
+			color: #ff0000;
+		}
+
+		@media screen and (min-width: 768px) {
+			.comment__rate {
+				top: 1px;
+				position: relative;
+			}
+		}
+
+		.rate-disabled {
+			opacity: 0.3;
+		}
+
+		.comment-sort-list {
+			position: absolute;
+			z-index: 2;
+			background-color: #fff;
+			padding: 8px 22px 8px 8px;
+			color: #999999;
+			box-shadow: 0 0 4px #9999999e;
+			border-radius: 5px;
+			font-size: 16px;
+			display: none;
+		}
+
+		@media screen and (max-width: 767px) {
+			.comment-sort-list {
+				font-size: 13px;
+			}
+		}
+
+		.comment-sort-list li:not(.active) > img {
+			visibility: hidden;
+		}
+
+		.visible {
+			display: block;
+		}
+	</style>
+	<body>
+		<style></style>
+		<header></header>
+		<main>
+			<aside></aside>
+			<section class="content">
+				<section class="content-section">
+					<div class="content-blocks">
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1 hide-small-wv"></div>
+						<div class="small-content flex-1"></div>
+						<div class="small-content flex-1"></div>
+						<div class="large-content"></div>
+					</div>
+				</section>
+			</section>
+		</main>
+	</body>
+	<script type="module" src="/js/index.js"></script>
+</html>
